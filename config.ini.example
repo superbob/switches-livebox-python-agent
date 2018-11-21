@@ -1,0 +1,12 @@
+[livebox-api]
+password=livebox-admin-password
+source-port=XXX
+target-ip=192.168.1.X
+target-port=22
+
+[google-id]
+service-account-file=app-name-01234567890b.json
+audience=client-id.apps.googleusercontent.com
+
+[bridge]
+ws-url=wss://example.com/ws/agent

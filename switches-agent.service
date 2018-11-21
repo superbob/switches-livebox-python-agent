@@ -1,0 +1,11 @@
+[Unit]
+Description=Switches Agent
+After=local-fs.target network.target
+
+[Service]
+User=switches
+WorkingDirectory=/opt/switches-agent
+ExecStart=/opt/switches-agent/.venv/bin/python3 /opt/switches-agent/ws_client.py
+
+[Install]
+WantedBy=multi-user.target

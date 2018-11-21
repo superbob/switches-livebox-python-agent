@@ -1,0 +1,4 @@
+cryptography==2.4.1
+PyJWT==1.6.4
+requests==2.19.1
+websocket-client==0.53.0
