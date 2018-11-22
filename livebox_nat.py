@@ -18,7 +18,7 @@ def is_nat_enabled(session, source_port, dest_ip, dest_port):
 
 
 def enable_nat(session, source_port, dest_ip, dest_port):
-    if not is_nat_enabled(session, dest_ip):
+    if not is_nat_enabled(session, source_port, dest_ip, dest_port):
         livebox4_api.add_port_forwarding(session, "webui_ssh-raspi", source_port, dest_port, dest_ip)
 
 

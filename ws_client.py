@@ -63,7 +63,7 @@ def get_status(router_password, source_port, dest_ip, dest_port):
 
 def set_nat_rule(router_password, source_port, dest_ip, dest_port, enable):
     session = livebox4_api.create_session(router_password)
-    already_enabled = livebox_nat.is_nat_enabled(session, dest_ip)
+    already_enabled = livebox_nat.is_nat_enabled(session, source_port, dest_ip, dest_port)
     if not already_enabled and enable:
         livebox_nat.enable_nat(session, source_port, dest_ip, dest_port)
     elif already_enabled and not enable:
@@ -82,7 +82,8 @@ def handle_message(ws, message, router_password, source_port, dest_ip, dest_port
         logger.debug("Received message: \"{message}\".".format(message=message))
         if message == GET_STATUS_COMMAND:
             logger.info('Replying with status.')
-            ws.send(STATUS_COMMAND_FORMAT.format(status_payload=json.dumps(get_status(router_password, source_port, dest_ip, dest_port))))
+            ws.send(STATUS_COMMAND_FORMAT.format(status_payload=json.dumps(get_status(router_password, source_port,
+                                                                                      dest_ip, dest_port))))
         elif message.startswith(SET_NAT_SSH_COMMAND_PREFIX):
             requested_state = message[len(SET_NAT_SSH_COMMAND_PREFIX):]
             value = json.loads(requested_state)
